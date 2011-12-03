@@ -19,3 +19,16 @@ var Deck = function () {
 };
 
 exports.Deck = Deck;
+
+var GamePlay = function() {
+    this.calculate = function(hand) {
+        var values = __.map(hand, function(card) {
+            return card.value > 10 ? 10 : card.value;
+        });
+        return  __.reduce(values, function(memo, value) {
+            return memo + value;
+        }, 0);
+    };
+};
+
+exports.GamePlay = GamePlay;

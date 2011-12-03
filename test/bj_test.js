@@ -47,3 +47,19 @@ vows.describe('Deck').addBatch({
         }
     }
 }).run();
+
+var GamePlay = require('../bj').GamePlay;
+
+vows.describe('GamePlay').addBatch({
+    'when creating a deck': {
+        topic: new GamePlay(),
+        'they should calculate a hand of 3 and 4 to 7': function(topic) {
+            var value = topic.calculate([{value: 3}, {value: 4}]);
+            assert.equal(7, value);
+        },
+        'they should calculate a hand of 3 and 13 to 13': function(topic) {
+            var value = topic.calculate([{value: 13}, {value: 3}]);
+            assert.equal(13, value);
+        }
+    }
+}).run();
