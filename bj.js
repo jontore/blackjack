@@ -8,6 +8,10 @@ var Deck = function () {
             this.deck.push({face: face, value: value}); 
          }, this);
     }, this);
+
+    this.shuffle = function() {
+        this.deck = __.shuffle(this.deck);
+    };
 };
 
 exports.Deck = Deck;
