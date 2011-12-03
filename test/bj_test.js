@@ -38,6 +38,12 @@ vows.describe('Deck').addBatch({
                 return __.range(1, 14);
             }));
             assert.notDeepEqual(values, sortedValues, 'not shuffeled');
+        },
+        'deal should remove one card from the top': function(topic) {
+            var deck = topic.deck;
+            var card1 = __.last(deck);
+            var card2 = topic.deal();
+            assert.equal(card1, card2);
         }
     }
 }).run();

@@ -12,6 +12,10 @@ var Deck = function () {
     this.shuffle = function() {
         this.deck = __.shuffle(this.deck);
     };
+
+    this.deal = function() {
+        return this.deck.pop();
+    };
 };
 
 exports.Deck = Deck;
