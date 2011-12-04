@@ -52,7 +52,11 @@ var GamePlay = function() {
 
     this.determineWinner = function() {
         var values = __.map(arguments, function(hand) {
-            return this.calculate(hand);
+            var calcValue = this.calculate(hand);
+            if(hand.length === 2 && calcValue === 21) {
+                calcValue += 1;
+            }
+            return calcValue;
         }, this);
         return __.indexOf(values, __.max(values, function(val) {return val}));
     }

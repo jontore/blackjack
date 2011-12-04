@@ -91,6 +91,10 @@ vows.describe('GamePlay').addBatch({
         'hand1 has 15 hand2 21, hand2 wins': function(topic) {
             var winner = topic.determineWinner([{value: 10}, {value: 5}], [{value: 10}, {value: 1}]);
             assert.equal(winner, 1);
+        },
+        '21 one with 3 cards looses to bj': function(topic) {
+            var winner = topic.determineWinner([{value: 7}, {value: 7}, {value: 7}], [{value: 13}, {value: 1}]);
+            assert.equal(winner, 1);
         }
     }
 }).run();
