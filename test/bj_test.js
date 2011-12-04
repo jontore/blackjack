@@ -51,15 +51,46 @@ vows.describe('Deck').addBatch({
 var GamePlay = require('../bj').GamePlay;
 
 vows.describe('GamePlay').addBatch({
-    'when creating a deck': {
+    'calculate value': {
         topic: new GamePlay(),
-        'they should calculate a hand of 3 and 4 to 7': function(topic) {
+        'value of hand 3 and 4 is 7': function(topic) {
             var value = topic.calculate([{value: 3}, {value: 4}]);
-            assert.equal(7, value);
+            assert.equal(value, 7);
         },
-        'they should calculate a hand of 3 and 13 to 13': function(topic) {
+        'value of hand 3 and 13 is 13': function(topic) {
             var value = topic.calculate([{value: 13}, {value: 3}]);
-            assert.equal(13, value);
+            assert.equal(value, 13);
+        },
+        'optimize values, ace is 11 when value is below 10': function(topic) {
+            var values = topic._optimizeValues([9,  1]);
+            assert.deepEqual([11, 9], values);
+        },
+        'value of hand ace and 3 is 14': function(topic) {
+            var value = topic.calculate([{value: 1}, {value: 3}]);
+            assert.equal(14, value);
+        },
+        'value af hand ace and 13 is 21': function(topic) {
+            var value = topic.calculate([{value: 1}, {value: 13}]);
+            assert.equal(value, 21);
+        },
+        'value af hand ace, 10 and 5 is 16': function(topic) {
+            var value = topic.calculate([{value: 1}, {value: 10}, {value: 5}]);
+            assert.equal(value, 16);
+        },
+        'value af hand 10 and ace is 21': function(topic) {
+            var value = topic.calculate([{value: 10}, {value: 1}]);
+            assert.equal(value, 21);
+        }
+    },
+    'determine winner': {
+        topic: new GamePlay(),
+        'hand1 has 21 hand2 15, hand one wins': function(topic) {
+            var winner = topic.determineWinner([{value: 10}, {value: 1}], [{value: 10}, {value: 5}]);
+            assert.equal(winner, 0);
+        },
+        'hand1 has 15 hand2 21, hand2 wins': function(topic) {
+            var winner = topic.determineWinner([{value: 10}, {value: 5}], [{value: 10}, {value: 1}]);
+            assert.equal(winner, 1);
         }
     }
 }).run();
