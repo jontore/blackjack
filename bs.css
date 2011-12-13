@@ -1,0 +1,43 @@
+table {
+    background: red;
+    color: red;
+    font-size: 40px;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+table.face {
+    border: 1px solid #CCCCCC;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    height: 440px;
+    width: 255px;
+    padding: 2.5px 5px 2.5px 5px;
+    border: 25px solid white;
+    border-style: double;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+table.inner {
+}
+
+table:hover, td:hover, tr:hover,
+table:hover, td:focus, tr:focus {
+    background: white;
+    color: black;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+td.top {
+    text-align: left;
+}
+
+td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+td.bottom {
+    text-align: right;
+}
+
