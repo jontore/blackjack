@@ -1,48 +1,66 @@
 <html>
+    <script type="text/javascript">
+        this.init = function(n) {
+            var table = document.getElementById('face');
+            for(var i = 0, row; row = table.rows[i]; i++) {
+                for(var j = 0; j < 5; j++) {
+                    var td = document.createElement('td');
+                    td.innerHTML = 'number' + n;
+                    row.appendChild(td);
+                }
+            }
+        }
+    </script>
     <head>
         <link rel="stylesheet" href="bs.css" type"text/css"/>
     </head>
     <body>
-        <table class='face'>
-            <tr class='top'>
+        <table id='face' class='face'>
+            <tr id='top' class='top'>
                 <td>9</td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
                 <td></td>
-                <td>
-                    <table class='inner'>
-                        <tr>
-                            <td><div>&#9827;</div></td>
-                            <td><div></div></td>
-                            <td><div>&#9827;</div></td>
-                        </tr>
-                        <tr>
-                            <td><div>&#9827;</div></td>
-                            <td><div></div></td>
-                            <td><div>&#9827;</div></td>
-                        </tr>
-                        <tr>
-                            <td><div>&#9827;</div></td>
-                            <td><div>&#9827;</div></td>
-                            <td><div>&#9827;</div></td>
-                        </tr>
-                        <tr>
-                            <td><div>&#9827;</div></td>
-                            <td><div></div></td>
-                            <td><div>&#9827;</div></td>
-                        </tr>
-                        <tr>
-                            <td><div>&#9827;</div></td>
-                            <td><div></div></td>
-                            <td><div>&#9827;</div></td>
-                        </tr>
-                   </table>
-                </td>
+                <td><div>&#9827;</div></td>
+                <td><div></div></td>
+                <td><div>&#9827;</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div>&#9827;</div></td>
+                <td><div></div></td>
+                <td><div>&#9827;</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div>&#9827;</div></td>
+                <td><div>&#9827;</div></td>
+                <td><div>&#9827;</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div>&#9827;</div></td>
+                <td><div></div></td>
+                <td><div>&#9827;</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><div>&#9827;</div></td>
+                <td><div></div></td>
+                <td><div>&#9827;</div></td>
                 <td></td>
             </tr>
             <tr class='bottom'>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td class='bottom'>9<td>
