@@ -1,13 +1,18 @@
 <html>
-    <script type="text/javascript">
-    </script>
     <head>
         <script src='node_modules/underscore/underscore.js' type='text/javascript'></script>
-        <script src='bj.js' type='text/javascript'></script>
         <link rel="stylesheet" href="bs.css" type"text/css"/>
     </head>
     <body>
-        <ul id='cards'>
+        <ul id='cards'> 
+            <li>
+                <table class='deck' onclick="console.log('hit')">
+                    <tr><td></td></tr>
+                </table>
+             </li>
         </ul>
+
+        <h1 id='winner' class='winner'> </h1>
+        <script src='bj.js' type='text/javascript'></script>
    </body>
 </html>

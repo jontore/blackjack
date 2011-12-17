@@ -9,7 +9,7 @@ var Deck = function () {
                 }, this);
             }, this);
 
-    this._create = function(card) {
+    this._create = function(card, cssClass) {
 
         var map = {
             2: [{c: 2, r:1}, {c: 2, r:5}],
@@ -40,7 +40,7 @@ var Deck = function () {
         list.appendChild(li);
 
         var table = document.createElement('table');
-        table.setAttribute('class', 'face');
+        table.setAttribute('class', cssClass);
         _.each(_.range(0, 7), function(r) {
             var tr =  document.createElement('tr');
             _.each(_.range(0, 5), function(c) {
@@ -57,6 +57,10 @@ var Deck = function () {
         });
         table.rows[0].cells[0].innerHTML = card.value;
         table.rows[6].cells[4].innerHTML = card.value;
+        table.rows[0].cells[0].setAttribute('class', 'top');
+        table.rows[6].cells[4].setAttribute('class', 'bottom');
+        
+        return card;
     };
 
     this.shuffle = function() {
@@ -66,12 +70,15 @@ var Deck = function () {
     this.deal = function() {
         return this.deck.pop();
     };
+
+    this.createAndDeal = function() {
+        return this._create(this.deal(), 'player');
+    };
 };
 
 //exports.Deck = Deck;
 
-var GamePlay = function() {
-
+var Calculator = function() {
     this._optimizeValues = function(values) {
         if(_.isEmpty(values)) {
             return []; 
@@ -98,12 +105,25 @@ var GamePlay = function() {
                 return card.value > 10 ? 10 : card.value;
                 });
         var optimized = this._optimizeValues(values.sort());
-        return this._simpleSum(optimized);
+        var sum = this._simpleSum(optimized);
+        return sum > 21 ? -1 : sum;
     };
+}
+var GamePlay = function() {
+    this.deck = new Deck();
+    this.deck.shuffle();
+
+    this.hand = [];
+    this.hand.push(this.deck.createAndDeal());
+    this.hand.push(this.deck.createAndDeal());
+
+    this.ai = new Ai(this.deck);
+
+    var calc = new Calculator();
 
     this.determineWinner = function() {
         var values = _.map(arguments, function(hand) {
-            var calcValue = this.calculate(hand);
+            var calcValue = calc.calculate(hand);
             if(hand.length === 2 && calcValue === 21) {
                 calcValue += 1;
             }
@@ -111,11 +131,43 @@ var GamePlay = function() {
         }, this);
         return _.indexOf(values, _.max(values, function(val) {return val}));
     }
+
+     this.done = function() {
+        var text = document.getElementById('winner');
+        var winner = this.determineWinner(this.hand, this.ai.hand) > 0 ? 'the house' : 'YOU';
+ 
+        text.innerHTML = 'The winner was ' + winner;
+
+        _.each(this.ai.hand, function(card) {
+            this.deck._create(card, 'house');        
+        }, this);
+     }
+
+     this.hit = function() {
+        this.hand.push(this.deck.createAndDeal());
+     }
+
 };
+
+var Ai = function(deck) {
+    this.hand = [];
+    var calc = new Calculator();
+    
+    this._deal = function() {
+        this.hand.push(deck.deal());
+    }
+
+    this._deal();
+    this._deal();
+
+    while(calc.calculate(this.hand) < 18) {
+        console.log(this);
+        this._deal();
+    };
+
+};
+
+var game = new GamePlay();
 
 //exports.GamePlay = GamePlay;
 
-var deck = new Deck();
-deck.shuffle();
-
-var c = deck.deal();
