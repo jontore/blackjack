@@ -15,22 +15,67 @@ var Deck = function () {
 
     this._create = function(card, cssClass) {
 
+        var map = {
+            1: [{c:2, r:2}],
+            2: [{c: 2, r:1}, {c: 2, r:5}],
+            3: [{c:2, r:1}, {c:2, r:3}, {c: 2, r:5}],
+            4: [{c:1, r:1}, {c:3, r: 1}, {c:1, r: 5}, {c: 3, r: 5}],
+            5: [{c:1, r:1}, {c:3, r: 1}, {c:1, r: 5}, {c: 3, r: 5}, {c:2, r: 3}],
+            6: [{c:1, r:1}, {c:3, r: 1}, {c:1, r: 5},
+                {c: 3, r: 5}, {c: 1, r: 3}, {c: 3, r: 3}],
+            7: [{c:1, r:1}, {c:3, r: 1}, {c:1, r: 5},
+                {c: 3, r: 5}, {c: 1, r: 3}, {c: 3, r: 3}, {c: 2, r: 2}],
+            8: [{c:1, r:1}, {c:3, r: 1}, {c:1, r: 5}, {c: 3, r: 5},
+               {c: 1, r: 3}, {c: 3, r: 3}, {c: 2, r: 2}, {c:2, r: 4}],
+            9: [{c:1, r:1}, {c:1, r:2}, {c:1, r:4}, {c:1, r:5},
+               {c: 3, r:1}, {c:3, r:2}, {c:3, r:4}, {c:3, r:5}, {c:2, r:3}],
+            10: [{c:1, r:1}, {c:1, r:2}, {c:1, r:3}, {c:1, r:4}, {c:1, r:5},
+                {c: 3, r:1}, {c:3, r:2}, {c:3, r:3}, {c:3, r:4}, {c:3, r:5}],
+            11: [{c: 2, r:2}],
+            12: [{c: 2, r:2}],
+            13: [{c: 2, r:2}]
+        };
+
+        var sym = {
+            S: '&#9824;',
+            C: '&#9827;',
+            H: '&#9829;',
+            D: '&#9830;'
+        };
+
         var list = document.getElementById('cards');
         var li = document.createElement('li')
         list.appendChild(li);
 
         var table = document.createElement('table');
-        var tr =  document.createElement('tr');
-        var td = document.createElement('td');
-        tr.appendChild(td);
-        table.appendChild(tr);
+        table.setAttribute('class', cssClass);
+        _.each(_.range(0, 7), function(r) {
+            var tr =  document.createElement('tr');
+            _.each(_.range(0, 5), function(c) {
+                var td = document.createElement('td');
+                tr.appendChild(td);
+            });
+            table.appendChild(tr);
+        });
         li.appendChild(table);
 
-        var emb = document.createElement('embed');
-        emb.setAttribute('src', 'cards/' + card.face + '/' + card.value + '.svg');
-        emb.setAttribute('type', 'image/svg+xml');
-        td.appendChild(emb);
-
+        var positions = map[card.value];
+        _.each(positions, function(pos) {
+            var cell = table.rows[pos.r].cells[pos.c]; 
+            if(card.value < 11) {
+                cell.innerHTML = sym[card.face];
+            } else {
+                var emb = document.createElement('embed');
+                emb.setAttribute('src', 'cards/' + card.face + '/' + card.value + '.svg');
+                emb.setAttribute('type', 'image/svg+xml');
+                cell.appendChild(emb);
+            }
+        });
+        table.rows[0].cells[0].innerHTML = card.value;
+        table.rows[6].cells[4].innerHTML = card.value;
+        table.rows[0].cells[0].setAttribute('class', 'top');
+        table.rows[6].cells[4].setAttribute('class', 'bottom');
+        
         return card;
     };
 
