@@ -3,9 +3,11 @@
 var Deck = function () {
     this.deck = [];
 
+    var specialSym = {11: 'J', 12: 'Q', 13: 'K', 14: 'A'};
     _.each(['S', 'H', 'C', 'D'], function(face) {
             _.each(_.range(1, 14), function(value) {
-                this.deck.push({face: face, value: value}); 
+                var sym = specialSym[value] || value;
+                this.deck.push({face: face, value: value, sym: sym}); 
                 }, this);
             }, this);
 
@@ -65,14 +67,11 @@ var Deck = function () {
             if(card.value < 11) {
                 cell.innerHTML = sym[card.face];
             } else {
-                var emb = document.createElement('embed');
-                emb.setAttribute('src', 'cards/' + card.face + '/' + card.value + '.svg');
-                emb.setAttribute('type', 'image/svg+xml');
-                cell.appendChild(emb);
+                cell.innerHTML = card.sym;
             }
         });
-        table.rows[0].cells[0].innerHTML = card.value;
-        table.rows[6].cells[4].innerHTML = card.value;
+        table.rows[0].cells[0].innerHTML = card.sym;
+        table.rows[6].cells[4].innerHTML = card.sym;
         table.rows[0].cells[0].setAttribute('class', 'top');
         table.rows[6].cells[4].setAttribute('class', 'bottom');
         
