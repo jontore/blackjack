@@ -3,7 +3,7 @@
 var Deck = function () {
     this.deck = [];
 
-    var specialSym = {11: 'J', 12: 'Q', 13: 'K', 14: 'A'};
+    var specialSym = {11: 'J', 12: 'Q', 13: 'K', 1: 'A'};
     _.each(['S', 'H', 'C', 'D'], function(face) {
             _.each(_.range(1, 14), function(value) {
                 var sym = specialSym[value] || value;
@@ -50,7 +50,7 @@ var Deck = function () {
         list.appendChild(li);
 
         var table = document.createElement('table');
-        table.setAttribute('class', cssClass);
+        table.setAttribute('class', cssClass + '_' + card.face);
         _.each(_.range(0, 7), function(r) {
             var tr =  document.createElement('tr');
             _.each(_.range(0, 5), function(c) {
@@ -70,8 +70,8 @@ var Deck = function () {
                 cell.innerHTML = card.sym;
             }
         });
-        table.rows[0].cells[0].innerHTML = card.sym;
-        table.rows[6].cells[4].innerHTML = card.sym;
+        table.rows[0].cells[0].innerHTML = card.sym + sym[card.face];
+        table.rows[6].cells[4].innerHTML = card.sym + sym[card.face];
         table.rows[0].cells[0].setAttribute('class', 'top');
         table.rows[6].cells[4].setAttribute('class', 'bottom');
         

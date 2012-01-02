@@ -10,7 +10,15 @@ table {
     transition: all 0.5s ease-in-out;
 }
 
-table.player, table.house, table.deck {
+table.player_H,
+table.player_S,
+table.player_D,
+table.player_C,
+table.house_H,
+table.house_S,
+table.house_D,
+table.house_C,
+table.deck {
     border: 1px solid #CCCCCC;
     -webkit-border-radius: 30px;
     border-radius: 30px;
@@ -29,12 +37,23 @@ table.deck {
     background: green;
 }
 
-table.player:hover,
-table.house:hover,
-table.house:hover,
-table.player:hover {
+table.house_S:hover,
+table.house_C:hover,
+table.player_S:hover,
+table.player_C:hover {
     background: #FFFFFA;
     color: black;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+table.house_H:hover,
+table.house_D:hover,
+table.player_H:hover,
+table.player_D:hover {
+    background: #FFFFFA;
+    color: red;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
