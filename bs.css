@@ -39,27 +39,36 @@ table.deck {
 
 table.house_S:hover,
 table.house_C:hover,
+table.house_H:hover,
+table.house_D:hover,
+table.player_H:hover,
+table.player_D:hover,
 table.player_S:hover,
 table.player_C:hover {
     background: #FFFFFA;
-    color: black;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
+}
+
+table.house_S:hover,
+table.house_C:hover,
+table.player_S:hover,
+table.player_C:hover {
+    color: black;
 }
 
 table.house_H:hover,
 table.house_D:hover,
 table.player_H:hover,
 table.player_D:hover {
-    background: #FFFFFA;
     color: red;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
 }
 
-table.house {
+table.house_S,
+table.house_C,
+table.house_D,
+table.house_H {
     background: grey;
     color: grey
 }
