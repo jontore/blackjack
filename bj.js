@@ -46,7 +46,7 @@ var Deck = function () {
         };
 
         var list = document.getElementById('cards');
-        var li = document.createElement('li')
+        var li = document.createElement('div')
         list.appendChild(li);
 
         var table = document.createElement('table');
